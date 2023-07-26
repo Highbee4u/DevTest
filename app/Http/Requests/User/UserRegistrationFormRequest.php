@@ -27,14 +27,7 @@ class UserRegistrationFormRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password' => [
-                'required',
-                Password::min(8)
-                    ->letters()
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-            ]
+            'role' => 'required|in:User,Admin'
         ];
     }
 }
