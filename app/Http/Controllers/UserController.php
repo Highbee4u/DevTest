@@ -42,6 +42,8 @@ class UserController extends Controller
 
         $response = User::create($data);
 
+        ProcessUser::dispatchNow($response['id']);
+
         return $response ? 
                 response()->json([
                     'status' => true,
@@ -61,7 +63,7 @@ class UserController extends Controller
     {
        $detail = User::where('api_token', $request->safe()->only('api_token'));
 
-       ProcessUser::dispatchNow($detail['id']);
+       
 
        return $detail ? 
                 response()->json([
